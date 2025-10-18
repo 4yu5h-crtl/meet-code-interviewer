@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mic, MicOff, Video, VideoOff, Monitor, Settings, MoreVertical } from "lucide-react";
+import { Mic, MicOff, Video, VideoOff, Monitor, Settings, MoreVertical, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -8,7 +8,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const ControlPanel = () => {
+interface ControlPanelProps {
+  onEndInterview?: () => void;
+}
+
+const ControlPanel = ({ onEndInterview }: ControlPanelProps) => {
   const [isMicOn, setIsMicOn] = useState(true);
   const [isCameraOn, setIsCameraOn] = useState(true);
 
@@ -85,6 +89,31 @@ const ControlPanel = () => {
                 </Tooltip>
               );
             })}
+            
+            {/* End Interview Button */}
+            {onEndInterview && (
+              <>
+                <div className="w-px h-6 bg-border mx-2" />
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="destructive"
+                      size="icon"
+                      onClick={onEndInterview}
+                      className="h-11 w-11 rounded-full"
+                    >
+                      <LogOut className="h-5 w-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent
+                    side="top"
+                    className="glass border-border/50 backdrop-blur-md"
+                  >
+                    <p className="text-sm">End Interview</p>
+                  </TooltipContent>
+                </Tooltip>
+              </>
+            )}
           </div>
         </TooltipProvider>
       </div>
