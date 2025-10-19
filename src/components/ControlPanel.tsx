@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Mic, MicOff, Video, VideoOff, Monitor, Settings, MoreVertical, LogOut } from "lucide-react";
+import { Mic, MicOff, Video, VideoOff, Monitor, Settings, Code, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -12,9 +12,11 @@ interface ControlPanelProps {
   onEndInterview?: () => void;
   isCameraOn?: boolean;
   onCameraToggle?: (value: boolean) => void;
+  showCodeEditor?: boolean;
+  onCodeEditorToggle?: (value: boolean) => void;
 }
 
-const ControlPanel = ({ onEndInterview, isCameraOn = true, onCameraToggle }: ControlPanelProps) => {
+const ControlPanel = ({ onEndInterview, isCameraOn = true, onCameraToggle, showCodeEditor = false, onCodeEditorToggle }: ControlPanelProps) => {
   const [isMicOn, setIsMicOn] = useState(true);
 
   const controls = [
@@ -47,10 +49,10 @@ const ControlPanel = ({ onEndInterview, isCameraOn = true, onCameraToggle }: Con
       variant: "ghost" as const,
     },
     {
-      icon: MoreVertical,
-      label: "More options",
-      isActive: false,
-      onClick: () => console.log("More options"),
+      icon: Code,
+      label: showCodeEditor ? "Close code editor" : "Open code editor",
+      isActive: showCodeEditor,
+      onClick: () => onCodeEditorToggle?.(!showCodeEditor),
       variant: "ghost" as const,
     },
   ];

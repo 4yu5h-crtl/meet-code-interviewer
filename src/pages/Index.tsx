@@ -197,6 +197,16 @@ const Index = () => {
         onEndInterview={handleEndInterview}
         isCameraOn={isCameraOn}
         onCameraToggle={setIsCameraOn}
+        showCodeEditor={showCodeEditor}
+        onCodeEditorToggle={(value) => {
+          if ('startViewTransition' in document) {
+            (document as any).startViewTransition(() => {
+              setShowCodeEditor(value);
+            });
+          } else {
+            setShowCodeEditor(value);
+          }
+        }}
       />
     </div>
   );
