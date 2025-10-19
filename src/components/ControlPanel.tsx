@@ -10,11 +10,12 @@ import {
 
 interface ControlPanelProps {
   onEndInterview?: () => void;
+  isCameraOn?: boolean;
+  onCameraToggle?: (value: boolean) => void;
 }
 
-const ControlPanel = ({ onEndInterview }: ControlPanelProps) => {
+const ControlPanel = ({ onEndInterview, isCameraOn = true, onCameraToggle }: ControlPanelProps) => {
   const [isMicOn, setIsMicOn] = useState(true);
-  const [isCameraOn, setIsCameraOn] = useState(true);
 
   const controls = [
     {
@@ -28,7 +29,7 @@ const ControlPanel = ({ onEndInterview }: ControlPanelProps) => {
       icon: isCameraOn ? Video : VideoOff,
       label: isCameraOn ? "Turn off camera" : "Turn on camera",
       isActive: isCameraOn,
-      onClick: () => setIsCameraOn(!isCameraOn),
+      onClick: () => onCameraToggle?.(!isCameraOn),
       variant: "default" as const,
     },
     {

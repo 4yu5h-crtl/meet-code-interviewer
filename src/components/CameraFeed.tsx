@@ -1,26 +1,28 @@
-import { User, UserCircle } from "lucide-react";
+import { User } from "lucide-react";
+import AudioVisualizer from "./AudioVisualizer";
 
 interface CameraFeedProps {
   label: string;
   isAI?: boolean;
   isActive?: boolean;
+  isCameraOn?: boolean;
   children?: React.ReactNode;
 }
 
-const CameraFeed = ({ label, isAI = false, isActive = true, children }: CameraFeedProps) => {
+const CameraFeed = ({ label, isAI = false, isActive = true, isCameraOn = false, children }: CameraFeedProps) => {
   return (
     <div className="relative w-full h-full glass-strong rounded-xl overflow-hidden group">
       {/* Placeholder content */}
       <div className="absolute inset-0 bg-gradient-to-br from-background-subtle to-muted flex items-center justify-center">
         {isAI ? (
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center animate-pulse-subtle">
-              <UserCircle className="w-16 h-16 text-white" />
-            </div>
-            {children}
-          </div>
+          children
         ) : (
-          <User className="w-24 h-24 text-muted-foreground opacity-50" />
+          // User camera off - show avatar with visualizer
+          !isCameraOn ? (
+            <AudioVisualizer isActive={isActive} showAvatar={true} avatarLabel={label} />
+          ) : (
+            <User className="w-24 h-24 text-muted-foreground opacity-50" />
+          )
         )}
       </div>
 

@@ -22,6 +22,7 @@ const Index = () => {
   const [questionsAndAnswers, setQuestionsAndAnswers] = useState<QuestionAnswer[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState("");
   const [currentAnswer, setCurrentAnswer] = useState("");
+  const [isCameraOn, setIsCameraOn] = useState(false);
 
   // Simulate AI asking questions (for demo purposes)
   useEffect(() => {
@@ -161,7 +162,7 @@ const Index = () => {
               showCodeEditor ? 'h-1/2' : 'flex-1'
             }`}
           >
-            <CameraFeed label="You" isActive={true} />
+            <CameraFeed label="You" isActive={true} isCameraOn={isCameraOn} />
           </div>
 
           {/* AI Interviewer Tile */}
@@ -189,7 +190,11 @@ const Index = () => {
       </main>
 
       {/* Control Panel */}
-      <ControlPanel onEndInterview={handleEndInterview} />
+      <ControlPanel 
+        onEndInterview={handleEndInterview}
+        isCameraOn={isCameraOn}
+        onCameraToggle={setIsCameraOn}
+      />
     </div>
   );
 };
