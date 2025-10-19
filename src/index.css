@@ -146,3 +146,34 @@
     transition: var(--transition-slow);
   }
 }
+
+/* View Transitions API support */
+@supports (view-transition-name: none) {
+  .video-tiles-container {
+    view-transition-name: video-container;
+  }
+
+  .user-camera-tile {
+    view-transition-name: user-camera;
+  }
+
+  .ai-camera-tile {
+    view-transition-name: ai-camera;
+  }
+
+  .code-editor-panel {
+    view-transition-name: code-editor;
+  }
+
+  ::view-transition-old(video-container),
+  ::view-transition-new(video-container),
+  ::view-transition-old(user-camera),
+  ::view-transition-new(user-camera),
+  ::view-transition-old(ai-camera),
+  ::view-transition-new(ai-camera),
+  ::view-transition-old(code-editor),
+  ::view-transition-new(code-editor) {
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
