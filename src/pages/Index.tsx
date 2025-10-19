@@ -150,7 +150,7 @@ const Index = () => {
       <main className="flex-1 flex overflow-hidden p-4 gap-4">
         {/* Video Tiles Container - Animates based on code editor visibility */}
         <div 
-          className={`flex gap-4 transition-all duration-700 ease-in-out ${
+          className={`flex gap-4 transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
             showCodeEditor 
               ? 'w-1/3 flex-col' 
               : 'flex-1 flex-row'
@@ -158,7 +158,7 @@ const Index = () => {
         >
           {/* User Camera Tile */}
           <div 
-            className={`transition-all duration-700 ease-in-out ${
+            className={`transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
               showCodeEditor ? 'h-1/2' : 'flex-1'
             }`}
           >
@@ -167,7 +167,7 @@ const Index = () => {
 
           {/* AI Interviewer Tile */}
           <div 
-            className={`transition-all duration-700 ease-in-out ${
+            className={`transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
               showCodeEditor ? 'h-1/2' : 'flex-1'
             }`}
           >
@@ -179,7 +179,7 @@ const Index = () => {
 
         {/* Code Editor - Slides in from the right */}
         <div 
-          className={`transition-all duration-700 ease-in-out ${
+          className={`transition-all duration-[1200ms] ease-[cubic-bezier(0.4,0,0.2,1)] ${
             showCodeEditor 
               ? 'flex-1 opacity-100 translate-x-0' 
               : 'w-0 opacity-0 translate-x-full overflow-hidden'
