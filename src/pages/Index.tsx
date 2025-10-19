@@ -146,34 +146,42 @@ const Index = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex overflow-hidden">
-        {/* Left Panel - Video Feeds */}
-        <div className="w-2/5 p-6 flex flex-col gap-6">
-          {/* User Camera */}
-          <div className="flex-1">
+      <main className="flex-1 flex overflow-hidden p-4 gap-4">
+        {/* Video Tiles Container - Animates based on code editor visibility */}
+        <div 
+          className={`flex gap-4 transition-all duration-700 ease-in-out ${
+            showCodeEditor 
+              ? 'w-1/3 flex-col' 
+              : 'flex-1 flex-row'
+          }`}
+        >
+          {/* User Camera Tile */}
+          <div 
+            className={`transition-all duration-700 ease-in-out ${
+              showCodeEditor ? 'h-1/2' : 'flex-1'
+            }`}
+          >
             <CameraFeed label="You" isActive={true} />
           </div>
 
-          {/* AI Avatar */}
-          <div className="flex-1">
+          {/* AI Interviewer Tile */}
+          <div 
+            className={`transition-all duration-700 ease-in-out ${
+              showCodeEditor ? 'h-1/2' : 'flex-1'
+            }`}
+          >
             <CameraFeed label="AI Interviewer" isAI={true} isActive={true}>
               <AudioVisualizer isActive={true} />
             </CameraFeed>
           </div>
-
-          {/* Current Question Display */}
-          {currentQuestion && (
-            <div className="glass border border-border rounded-lg p-4">
-              <h3 className="text-sm font-semibold text-primary mb-2">Current Question:</h3>
-              <p className="text-sm text-foreground">{currentQuestion}</p>
-            </div>
-          )}
         </div>
 
-        {/* Right Panel - Code Editor (Conditional) */}
+        {/* Code Editor - Slides in from the right */}
         <div 
-          className={`transition-all duration-500 ease-in-out ${
-            showCodeEditor ? 'flex-1 opacity-100' : 'w-0 opacity-0 overflow-hidden'
+          className={`transition-all duration-700 ease-in-out ${
+            showCodeEditor 
+              ? 'flex-1 opacity-100 translate-x-0' 
+              : 'w-0 opacity-0 translate-x-full overflow-hidden'
           }`}
         >
           {showCodeEditor && <CodeEditor />}
